@@ -151,7 +151,8 @@ if (!isset($_SESSION['client_id'])) {
 // Código para el CRUD de productos
 ?>
 
-<h2>Bienvenido, <?php echo $_SESSION['email']; ?></h2>
+<h2>Bienvenido, <?php echo $_SESSION['nombre']; ?></h2>
+
 
 <h1>Lista de Productos</h1>
 <a href="usuarios.php" style="margin-right: 15px;">Ver Usuarios</a>
