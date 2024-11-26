@@ -47,5 +47,6 @@ if (!isset($_SESSION['client_id'])) {
         }
     }
     ?>
+    <a href="index.php">Volver</a>
 </body>
 </html>

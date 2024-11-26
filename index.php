@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>CRUD de Productos</title>
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -22,6 +22,7 @@ if (!isset($_SESSION['client_id'])) {
 ?>
 
 <h2>Bienvenido, <?php echo $_SESSION['email']; ?></h2>
+
 <h1>Lista de Productos</h1>
 <a href="usuarios.php" style="margin-right: 15px;">Ver Usuarios</a>
 <a href="crear.php">Agregar Nuevo Producto</a>
