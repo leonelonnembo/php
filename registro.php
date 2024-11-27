@@ -8,27 +8,33 @@ if (isset($_POST['submit'])) {
     $direccion = $_POST['direccion'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Encriptar la contraseña
 
-    // Verificar si el email ya está registrado
-    $sql_check = "SELECT * FROM clientes WHERE email = '$email'";
-    $result_check = $conn->query($sql_check);
-
-    if ($result_check->num_rows > 0) {
-        $error_message = "Este correo ya está registrado. Por favor, intenta con otro.";
+    // Validar el número de teléfono (solo números y el signo '+')
+    if (!preg_match("/^[+0-9]+$/", $telefono)) {
+        $error_message = "El número de teléfono no es válido. Solo se permiten números y el signo '+'.";
     } else {
-        // Registrar al nuevo cliente
-        $sql = "INSERT INTO clientes (nombre, email, telefono, direccion, password) 
-                VALUES ('$nombre', '$email', '$telefono', '$direccion', '$password')";
-        
-        if ($conn->query($sql) === TRUE) {
-            // Registro exitoso, redirigir al login
-            header("Location: login.php");
-            exit();
+        // Verificar si el email ya está registrado
+        $sql_check = "SELECT * FROM clientes WHERE email = '$email'";
+        $result_check = $conn->query($sql_check);
+
+        if ($result_check->num_rows > 0) {
+            $error_message = "Este correo ya está registrado. Por favor, intenta con otro.";
         } else {
-            $error_message = "Error: " . $conn->error;
+            // Registrar al nuevo cliente
+            $sql = "INSERT INTO clientes (nombre, email, telefono, direccion, password) 
+                    VALUES ('$nombre', '$email', '$telefono', '$direccion', '$password')";
+            
+            if ($conn->query($sql) === TRUE) {
+                // Registro exitoso, redirigir al login
+                header("Location: login.php");
+                exit();
+            } else {
+                $error_message = "Error: " . $conn->error;
+            }
         }
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
